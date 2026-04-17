@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Sobia's Birthday Letter"
+version = "1.0.0"
+id = "artifacts/sobia-birthday"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25122
+
+[services.development]
+run = "pnpm --filter @workspace/sobia-birthday run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sobia-birthday", "run", "build" ]
+publicDir = "artifacts/sobia-birthday/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25122"
+BASE_PATH = "/"
