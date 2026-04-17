@@ -479,7 +479,7 @@ export default function Home() {
                   Zeeshan 🍉
                 </p>
                 <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-                  {["💕", "🌸", "💌", "✨", "🥹"].map((emoji, i) => (
+                  {["💕", "🌸", "💌", "✨", "🍓"].map((emoji, i) => (
                     <span
                       key={i}
                       className="heartbeat"
