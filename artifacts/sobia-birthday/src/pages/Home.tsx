@@ -1,4 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import img1 from "@assets/1776435407667_1776436469801.png";
+import img2 from "@assets/1776435395083_1776436484043.png";
+import img3 from "@assets/1776435379814_1776436484100.png";
+import img4 from "@assets/1776435362295_1776436484121.png";
+import img5 from "@assets/1776435331333_1776436484139.png";
 
 const LETTER_TEXT = `Sobia, my sweet girl.
 
@@ -28,7 +33,7 @@ This is your birthday, but honestly? I'm the one who got the gift.
 
 Happy birthday my baby. Inshallah we will get married, have kids, build something beautiful together. Inshallah we will make it.
 
-I LOVE YOU SO MUCH IT'S ACTUALLY EMBARRASSING.`;
+I LOVEEEE YOUUUU SOOOO MUCHHHH`;
 
 interface Confetti {
   id: number;
@@ -47,14 +52,11 @@ interface Sparkle {
 }
 
 const STICKER_CONFIGS = [
-  { emoji: "🌸", top: "8%", left: "4%", rot: "-12deg", dur: "3.2s", delay: "0s", size: "2.8rem" },
-  { emoji: "💕", top: "15%", right: "5%", rot: "8deg", dur: "2.8s", delay: "0.4s", size: "2.4rem" },
-  { emoji: "🌹", top: "45%", left: "2%", rot: "-6deg", dur: "3.5s", delay: "0.8s", size: "2.6rem" },
-  { emoji: "✨", top: "60%", right: "3%", rot: "14deg", dur: "2.6s", delay: "0.2s", size: "2.2rem" },
-  { emoji: "🍉", top: "80%", left: "5%", rot: "5deg", dur: "3.1s", delay: "1s", size: "2.5rem" },
-  { emoji: "💌", top: "85%", right: "4%", rot: "-10deg", dur: "3.3s", delay: "0.6s", size: "2.3rem" },
-  { emoji: "🌺", top: "25%", left: "3%", rot: "10deg", dur: "2.9s", delay: "1.2s", size: "2rem" },
-  { emoji: "🦋", top: "70%", right: "5%", rot: "-8deg", dur: "3.8s", delay: "0.3s", size: "2.1rem" },
+  { img: img1, top: "5%",  left: "2%",   rot: "-10deg", dur: "3.2s", delay: "0s",   size: "130px" },
+  { img: img2, top: "38%", right: "1%",  rot: "8deg",   dur: "2.8s", delay: "0.4s", size: "120px" },
+  { img: img3, top: "62%", left: "1%",   rot: "-6deg",  dur: "3.5s", delay: "0.8s", size: "115px" },
+  { img: img4, top: "15%", right: "2%",  rot: "12deg",  dur: "2.6s", delay: "0.2s", size: "110px" },
+  { img: img5, top: "75%", right: "2%",  rot: "-9deg",  dur: "3.1s", delay: "1s",   size: "120px" },
 ];
 
 const TWINKLE_STARS = Array.from({ length: 16 }, (_, i) => ({
@@ -167,25 +169,33 @@ export default function Home() {
         </div>
       ))}
 
-      {/* Floating sticker emojis */}
+      {/* Floating PNG stickers */}
       {STICKER_CONFIGS.map((sticker, i) => (
         <div
           key={i}
-          className="sticker absolute pointer-events-none select-none hidden sm:block"
+          className="sticker absolute pointer-events-none select-none"
           style={{
             top: sticker.top,
-            ...(sticker.left ? { left: sticker.left } : {}),
-            ...(sticker.right ? { right: sticker.right } : {}),
+            ...("left" in sticker ? { left: (sticker as { left: string }).left } : {}),
+            ...("right" in sticker ? { right: (sticker as { right: string }).right } : {}),
             "--rot": sticker.rot,
             "--duration": sticker.dur,
             "--delay": sticker.delay,
-            fontSize: sticker.size,
+            width: sticker.size,
             transform: `rotate(${sticker.rot})`,
-            filter: "drop-shadow(0 2px 4px rgba(233,30,140,0.2))",
             zIndex: 1,
           } as React.CSSProperties}
         >
-          {sticker.emoji}
+          <img
+            src={sticker.img}
+            alt=""
+            style={{
+              width: "100%",
+              height: "auto",
+              mixBlendMode: "multiply",
+              filter: "drop-shadow(0 3px 8px rgba(233,30,140,0.25))",
+            }}
+          />
         </div>
       ))}
 
@@ -415,7 +425,7 @@ export default function Home() {
                     }}>
                       {paragraph}
                     </p>
-                  ) : paragraph === "I LOVE YOU SO MUCH IT'S ACTUALLY EMBARRASSING." ? (
+                  ) : paragraph === "I LOVEEEE YOUUUU SOOOO MUCHHHH" ? (
                     // Emphatic line
                     <p style={{
                       fontFamily: "'Caveat', cursive",
